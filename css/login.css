@@ -1,0 +1,45 @@
+/* LOGIN */
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 600px;
+    color: azure;
+}
+
+.login-wrapper {
+    background-color: rgb(112, 8, 34);
+    border-radius: 10px;
+    padding-bottom: 10px;
+}
+table{
+    width: 350px;
+}
+
+td{
+    text-align: center;
+}
+
+.login-wrapper h2 {
+    border-bottom: 2px solid white;
+    padding: 10px 0;
+    margin-bottom: 10px;
+}
+
+input {
+    margin-bottom: 10px;
+}
+
+
+.btn-login {
+    width: 100px;
+    height: 30px;
+    margin-top: 5px;
+    font-size: medium;
+    font-weight: bold;
+    color: brown;
+    border: none;
+    background-color: azure;
+    border-radius: 5px;
+    cursor: pointer;
+}
