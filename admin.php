@@ -4,17 +4,25 @@ include("header-admin.php");
 
 $pasien = query("SELECT * FROM pasien WHERE status = 'Belum Terdata'");
 $menu = "Belum terdaftar";
+$tombol = "Input data";
+$link = "input-data-pasien.php";
 if (isset($_GET['menu'])) {
     $menu = $_GET['menu'];
     switch ($menu) {
         case "Belum terdata":
             $pasien = query("SELECT * FROM pasien WHERE status = '$menu'");
+            $tombol = "Input data";
+            $link = "input-data-pasien.php";
             break;
         case "Menunggu dokter":
             $pasien = query("SELECT * FROM pasien WHERE status = '$menu'");
+            $tombol = "Berikan obat";
+            $link = "input-obat-pasien.php";
             break;
         case "Menunggu obat":
             $pasien = query("SELECT * FROM pasien WHERE status = '$menu'");
+            $tombol = "Selesai";
+            $link = "admin.php";
             break;
         case "Pulang":
             $pasien = query("SELECT * FROM pasien WHERE status = '$menu'");
@@ -61,22 +69,47 @@ if (isset($_GET['menu'])) {
                 <th>Nama</th>
                 <th>Alamat</th>
                 <th>Keluhan</th>
+                <?php if ($menu == "Menunggu obat") : ?>
+                    <th>Obat</th>
+                <?php
+                endif;
+                ?>
             </tr>
             <?php $i = 1; ?>
             <?php foreach ($pasien as $row) : ?>
                 <tr>
-                    <td><?= $i; ?></td>
-                    <td><a href="input-data-pasien.php">
-
-                            <button>Input data</button></a>
-
+                    <td><?= $row['id']; ?></td>
+                    <td>
+                        <?php if ($menu == "Menunggu obat") : ?>
+                            <form action="" method="GET">
+                                <button name="menu" value="Menunggu obat"><?= $tombol ?></button>
+                                <?php
+                                $id = $row['id'];
+                                $query = "UPDATE pasien SET status = 'Pulang' WHERE id = $id ;";
+                                mysqli_query($conn, $query);
+                                ?>
+                            </form>
+                        <?php
+                        else :
+                        ?>
+                            <form action="<?php echo $link ?>" method="GET">
+                                <button name="id" value="<?= $row['id'] ?>"><?= $tombol ?></button>
+                            </form>
+                        <?php
+                        endif;
+                        ?>
                     </td>
                     <td><?= $row['status'] ?></td>
                     <td><?= $row["tanggal_masuk"]; ?></td>
                     <td><?= $row['jam_masuk'] ?></td>
-                    <td>Yulyano Thomas Djaya</td>
-                    <td>Alamat</td>
-                    <td>Keluhan</td>
+                    <td><?= $row['nama'] ?></td>
+                    <td><?= $row['alamat'] ?></td>
+                    <td><?= $row['keluhan'] ?></td>
+                    <?php if ($menu == "Menunggu obat") : ?>
+                        <td><?= $row['obat'] ?></td>
+                    <?php
+                    endif;
+                    ?>
                 </tr>
                 <?php $i++; ?>
             <?php endforeach; ?>

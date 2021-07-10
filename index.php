@@ -18,9 +18,6 @@ VALUES ('$tanggal_masuk','$jam_masuk')";
     }
 }
 ?>
-
-
-
 <html>
 
 <head>

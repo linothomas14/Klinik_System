@@ -1,13 +1,16 @@
 <?php
 
 require "config.php";
-
+$id = $_GET['id'];
+$pasien = query("SELECT * FROM pasien WHERE id = $id ;");
+foreach ($pasien as $row) {
+    $nama = $row['nama'];
+    $alamat = $row['alamat'];
+    $keluhan = $row['keluhan'];
+}
 if (isset($_POST['ubah-data'])) {
-    $nama = $_POST['nama'];
-    $alamat = $_POST['alamat'];
-    $keluhan = $_POST['keluhan'];
-    $id = $_GET['id'];
-    $query = "UPDATE pasien set nama = '$nama', keluhan = '$keluhan', alamat = '$alamat', status = 'Menunggu Dokter' WHERE id = $id ;";
+    $obat = $_POST['obat'];
+    $query = "UPDATE pasien SET status = 'Menunggu obat', obat = '$obat' WHERE id = $id ;";
     if (mysqli_query($conn, $query)) {
         header("Location: admin.php");
     } else {
@@ -29,24 +32,37 @@ if (isset($_POST['ubah-data'])) {
 </head>
 
 <body>
+    <h1>Nama = <php echo($pasien)?>
+    </h1>
     <form action="" method="POST">
         <table>
             <tr>
                 <td> <label for="nama">Nama Lengkap : </label>
                 </td>
-                <td><input type="text" name="nama" placeholder="Nama Lengkap"></td>
+                <td>
+                    <p><?= $nama ?></p>
+                </td>
             </tr>
 
             <tr>
                 <td> <label for="keluhan">Keluhan pasien : </label>
                 </td>
-                <td><input type="text" name="keluhan" placeholder="Keluhan"></td>
+                <td>
+                    <p><?= $keluhan ?></p>
+                </td>
             </tr>
             <tr>
                 <td> <label for="alamat">Alamat : </label>
                 </td>
                 <td>
-                    <textarea name="alamat" id="" cols="30" rows="4"></textarea>
+                    <p><?= $alamat ?></p>
+                </td>
+            </tr>
+            <tr>
+                <td> <label for="obat">Obat pasien : </label>
+                </td>
+                <td>
+                    <input type="text" name="obat">
                 </td>
             </tr>
             <td></td>
