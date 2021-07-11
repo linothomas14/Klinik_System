@@ -1,22 +1,38 @@
-th,td{
-    border: 1px solid black;
-    padding: 1rem;
+th,
+td {
+  padding: 15px;
+  text-align: left;
+}
+th {
+  background-color: crimson;
+  color: rgb(39, 38, 37);
 }
 
-th{
-    background-color: skyblue;
+td {
+  text-align: left;
 }
 
-td{
-    text-align: left;
+table {
+  border-collapse: collapse;
+  margin: 0 auto;
 }
 
-table{
-    border-collapse: collapse;
-    margin: 0 auto;
+.table-wrapper {
+  text-align: center;
 }
 
-.table-wrapper{
-    text-align: center;
+/* BUTTON MENU */
+.menu-option {
+}
+.menu-option input {
+  padding: 12px 24px;
+  color: black;
+  display: inline-block;
+  opacity: 0.8;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
+.menu-option input:hover {
+  opacity: 1;
+}
