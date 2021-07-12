@@ -3,7 +3,7 @@ include("session.php");
 include("header-admin.php");
 
 $pasien = query("SELECT * FROM pasien WHERE status = 'Belum Terdata'");
-$menu = "Belum Terdaftar";
+$menu = "Belum Terdata";
 $tombol = "Input data";
 $link = "input-data-pasien.php";
 if (isset($_GET['menu'])) {
@@ -75,6 +75,7 @@ if (isset($_GET['menu'])) {
                     <th class="belumTerdata">Obat</th>
                 <?php else : ?>
                     <th class="belumTerdata">Keluhan</th>
+<<<<<<< HEAD
                 <?php
                 endif;
                 ?>
@@ -120,6 +121,13 @@ if (isset($_GET['menu'])) {
                 <?php
                         endif;
                 ?> -->
+=======
+                <?php
+                endif;
+                ?>
+
+                <th class="aksi">Aksi</th>
+>>>>>>> 81ba0cac1492dcc7cb87cd1ecf4ee2376c81956e
             </tr>
 
             <?php $i = 1; ?>
@@ -151,8 +159,7 @@ if (isset($_GET['menu'])) {
                         else :
                         ?>
                             <form action="<?php echo $link ?>" method="GET">
-                                <button name="id" value="<?= $row['id'] ?>"><?= $tombol ?> </button>
-
+                                <button class="aksi" name="id" value="<?= $row['id'] ?>"><?= $tombol ?> </button>
                             </form>
                         <?php
                         endif;
@@ -162,7 +169,41 @@ if (isset($_GET['menu'])) {
                 <?php $i++; ?>
             <?php endforeach; ?>
 
+<<<<<<< HEAD
 
+
+=======
+            <div>
+                <?php switch ($menu):
+                    case ("Pulang"): ?>
+                        <div>
+                            <style>
+                                .aksi {
+                                    display: none;
+                                }
+                            </style>
+                        </div>
+                        <?php break; ?>
+                    <?php
+                    case ("Belum Terdata"): ?>
+                        <!-- Ini di belum terdaftar apa belum terdata? -->
+                        <div>
+                            <style>
+                                th.belumTerdata {
+                                    display: none;
+                                }
+
+                                td.belumTerdata {
+                                    display: none;
+                                }
+
+                                button.
+                            </style>
+                        </div>
+                        <?php break; ?>
+                <?php endswitch; ?>
+            </div>
+>>>>>>> 81ba0cac1492dcc7cb87cd1ecf4ee2376c81956e
 
 
         </table>

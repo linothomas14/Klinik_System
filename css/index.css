@@ -1,28 +1,31 @@
-.main{
-    text-align: center;
-    padding: 50px;
-    padding-top: 10px;
-    background-color: bisque;
+.main {
+  text-align: center;
+  padding: 50px;
+  padding-top: 10px;
+  background-color: bisque;
 }
 
-.tanggal{
-margin-bottom: 20px;
-    
+.tanggal {
+  margin-bottom: 20px;
 }
 
-.antrian > button{
-    margin-top: 15px;
-    height: 150px;
-    width: 150px;
-    background-color: salmon;
-    font-size: large;
-    border: none;
-    color: azure;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: all .2s;
+.antrian > button {
+  margin-top: 15px;
+  height: 150px;
+  width: 150px;
+  background-color: salmon;
+  font-size: large;
+  border: none;
+  color: azure;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
-.antrian > button:hover{
-    background-color:  rgb(112, 8, 34);
+.antrian > button:hover {
+  background-color: rgb(112, 8, 34);
+}
+
+.jam {
+  font-size: large;
 }

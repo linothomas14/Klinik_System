@@ -4,13 +4,12 @@ include "config.php";
 
 setlocale(LC_ALL, 'id-ID', 'id_ID');
 date_default_timezone_set("Asia/Jakarta");
+echo $timestamp =  date('H:i:s');
 
 if (isset($_POST['button1'])) {
     $tanggal_masuk = date("d-m-Y");
     $jam_masuk = date("H:i:s");
-    $sql = "INSERT INTO pasien (tanggal_masuk,jam_masuk)
-VALUES ('$tanggal_masuk','$jam_masuk')";
-
+    $sql = "INSERT INTO pasien (tanggal_masuk,jam_masuk) VALUES ('$tanggal_masuk','$jam_masuk')";
     if (mysqli_query($conn, $sql)) {
         echo "New record created successfully";
     } else {
