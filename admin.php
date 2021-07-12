@@ -3,23 +3,23 @@ include("session.php");
 include("header-admin.php");
 
 $pasien = query("SELECT * FROM pasien WHERE status = 'Belum Terdata'");
-$menu = "Belum terdaftar";
+$menu = "Belum Terdaftar";
 $tombol = "Input data";
 $link = "input-data-pasien.php";
 if (isset($_GET['menu'])) {
     $menu = $_GET['menu'];
     switch ($menu) {
-        case "Belum terdata":
+        case "Belum Terdata":
             $pasien = query("SELECT * FROM pasien WHERE status = '$menu'");
             $tombol = "Input data";
             $link = "input-data-pasien.php";
             break;
-        case "Menunggu dokter":
+        case "Menunggu Dokter":
             $pasien = query("SELECT * FROM pasien WHERE status = '$menu'");
             $tombol = "Berikan obat";
             $link = "input-obat-pasien.php";
             break;
-        case "Menunggu obat":
+        case "Menunggu Obat":
             $pasien = query("SELECT * FROM pasien WHERE status = '$menu'");
             $tombol = "Selesai";
             $link = "admin.php";
@@ -39,46 +39,62 @@ if (isset($_GET['menu'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/index.css">
+
     <link rel="stylesheet" href="/css/admin.css">
     <title>Klinik Jotaro</title>
 </head>
 
 <body>
+
     <div class="table-wrapper">
         <h1><?= $menu ?></h1>
         <br>
-        <table>
+        <div class="menu-option">
             <form action="" method="get">
-                <input type="submit" name="menu" value="Belum terdata" />
-                <input type="submit" name="menu" value="Menunggu dokter" />
-                <input type="submit" name="menu" value="Menunggu obat" />
+                <input type="submit" name="menu" value="Belum Terdata" />
+                <input type="submit" name="menu" value="Menunggu Dokter" />
+                <input type="submit" name="menu" value="Menunggu Obat" />
                 <input type="submit" name="menu" value="Pulang" />
             </form>
+        </div>
 
-        </table>
+
+
         <br>
 
-        <table>
+        <table class="table">
             <tr>
                 <th>No.</th>
-                <th>Aksi</th>
                 <th>Status</th>
                 <th>Tanggal</th>
                 <th>Jam</th>
-                <th>Nama</th>
-                <th>Alamat</th>
-                <th>Keluhan</th>
+                <th class="belumTerdata">Nama</th>
+                <th class="belumTerdata">Alamat</th>
+                <th class="belumTerdata">Keluhan</th>
+                <th>Aksi</th>
+
                 <?php if ($menu == "Menunggu obat") : ?>
                     <th>Obat</th>
                 <?php
                 endif;
                 ?>
             </tr>
+
             <?php $i = 1; ?>
             <?php foreach ($pasien as $row) : ?>
                 <tr>
                     <td><?= $row['id']; ?></td>
+                    <td><?= $row['status'] ?></td>
+                    <td><?= $row["tanggal_masuk"]; ?></td>
+                    <td><?= $row['jam_masuk'] ?></td>
+                    <td class="belumTerdata"><?= $row['nama'] ?></td>
+                    <td class="belumTerdata"><?= $row['alamat'] ?></td>
+                    <td class="belumTerdata"><?= $row['keluhan'] ?></td>
+
+                    <?php if ($menu == "Menunggu obat") : ?>
+                        <td><?= $row['obat'] ?></td>
+                    <?php endif; ?>
+
                     <td>
                         <?php if ($menu == "Menunggu obat") : ?>
                             <form action="" method="GET">
@@ -93,26 +109,52 @@ if (isset($_GET['menu'])) {
                         else :
                         ?>
                             <form action="<?php echo $link ?>" method="GET">
-                                <button name="id" value="<?= $row['id'] ?>"><?= $tombol ?></button>
+                                <button name="id" value="<?= $row['id'] ?>"><?= $tombol ?> </button>
+
                             </form>
                         <?php
                         endif;
                         ?>
                     </td>
-                    <td><?= $row['status'] ?></td>
-                    <td><?= $row["tanggal_masuk"]; ?></td>
-                    <td><?= $row['jam_masuk'] ?></td>
-                    <td><?= $row['nama'] ?></td>
-                    <td><?= $row['alamat'] ?></td>
-                    <td><?= $row['keluhan'] ?></td>
-                    <?php if ($menu == "Menunggu obat") : ?>
-                        <td><?= $row['obat'] ?></td>
-                    <?php
-                    endif;
-                    ?>
                 </tr>
                 <?php $i++; ?>
             <?php endforeach; ?>
+
+
+            <div>
+                <?php switch ($menu):
+                    case ("Belum Terdaftar"): ?>
+                        <!-- Ini di belum terdaftar apa belum terdata? -->
+                        <div>
+                            <style>
+                                th.belumTerdata {
+                                    display: none;
+                                }
+
+                                td.belumTerdata {
+                                    display: none;
+                                }
+                            </style>
+                        </div>
+                        <?php break; ?>
+                    <?php
+                    case ("Belum Terdata"): ?>
+                        <!-- Ini di belum terdaftar apa belum terdata? -->
+                        <div>
+                            <style>
+                                th.belumTerdata {
+                                    display: none;
+                                }
+
+                                td.belumTerdata {
+                                    display: none;
+                                }
+                            </style>
+                        </div>
+                        <?php break; ?>
+                <?php endswitch; ?>
+            </div>
+
         </table>
     </div>
 </body>
