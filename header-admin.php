@@ -19,7 +19,7 @@
 
         <div class="header-right">
             <a href="admin.php">Home</a>
-            <a href="update-artikel.php">Update Artikel</a>
+            <!-- <a href="update-artikel.php">Update Artikel</a> -->
             <a href="logout.php" class="login">Logout</a>
         </div>
 

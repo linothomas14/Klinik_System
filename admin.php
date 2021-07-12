@@ -15,13 +15,13 @@ if (isset($_GET['menu'])) {
     switch ($menu) {
         case "Belum Terdata":
             $pasien = query("SELECT * FROM pasien WHERE status = '$menu'");
-            $tombol = "Input data";
+            $tombol = "Input Data";
             $link = "input-data-pasien.php";
             $class = "hidden";
             break;
         case "Menunggu Dokter":
             $pasien = query("SELECT * FROM pasien WHERE status = '$menu'");
-            $tombol = "Berikan obat";
+            $tombol = "Berikan Obat";
             $link = "input-obat-pasien.php";
             $class = "";
             break;
@@ -64,7 +64,7 @@ if (isset($_GET['menu'])) {
 <body>
 
     <div class="table-wrapper">
-        <h1><?= $menu ?></h1>
+        <h1 id="title"><?= $menu ?></h1>
         <br>
         <div class="menu-option">
             <form action="" method="get">
@@ -109,7 +109,7 @@ if (isset($_GET['menu'])) {
                     <td class="<?= $class1 ?> "><?= $row['obat'] ?></td>
 
 
-                    <td>
+                    <td class="<?= $aksi ?>">
                         <?php if ($menu == "Menunggu Obat") : ?>
                             <form action="" method="POST">
                                 <button name="aksi" value="Menunggu Obat"><?= $tombol ?></button>
@@ -126,7 +126,7 @@ if (isset($_GET['menu'])) {
                         else :
                         ?>
                             <form action="<?php echo $link ?>" method="GET">
-                                <button class="<?= $aksi ?>" name="id" value="<?= $row['id'] ?>"><?= $tombol ?> </button>
+                                <button class="btn <?= $aksi ?>" name="id" value="<?= $row['id'] ?>"><?= $tombol ?> </button>
                             </form>
                         <?php
                         endif;

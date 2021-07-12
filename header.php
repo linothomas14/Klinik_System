@@ -19,7 +19,7 @@
 
         <div class="header-right">
             <a href="index.php">Home</a>
-            <a href="#">Artikel</a>
+            <!-- <a href="#">Artikel</a> -->
             <a href="#">About</a>
             <a href="login.php" class="login">Login</a>
         </div>
