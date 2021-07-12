@@ -29,8 +29,34 @@ VALUES ('$tanggal_masuk','$jam_masuk')";
 
     <div class="main">
         <div class="tanggal">
-            <h2><?= date("D, j F Y"); ?></h2>
-            <h1><?= date("H:i:s"); ?></h1>
+            <!-- <h2><?= date("D, j F Y"); ?></h2>
+            <h1><?= date("H:i:s"); ?></h1> -->
+
+            <div id="clock"></div>
+            <!-- LIVE CLOCK TAPI GATAU BISA DIGEDEIN APA GAK -->
+
+            <body onload="startTime()">
+                <script type="text/javascript">
+                    function startTime() {
+                        var today = new Date();
+                        var h = today.getHours();
+                        var m = today.getMinutes();
+                        var s = today.getSeconds();
+                        m = checkTime(m);
+                        s = checkTime(s);
+                        document.getElementById('clock').innerHTML = h + ":" + m + ":" + s;
+                        var t = setTimeout(function() {
+                            startTime()
+                        }, 500);
+                    }
+
+                    function checkTime(i) {
+                        if (i < 10) {
+                            i = "0" + i
+                        }; // add zero in front of numbers < 10
+                        return i;
+                    }
+                </script>
         </div>
         <div class="antrian">
             <h1>Nomor antrian : X</h1>

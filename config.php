@@ -1,6 +1,6 @@
 <?php
 
-$conn = mysqli_connect('localhost', 'kali', 'admin', 'klinik_jotaro');
+$conn = mysqli_connect('localhost', 'root', '', 'klinik_jotaro');
 
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());

@@ -32,8 +32,6 @@ if (isset($_POST['ubah-data'])) {
 </head>
 
 <body>
-    <h1>Nama = <php echo($pasien)?>
-    </h1>
     <form action="" method="POST">
         <table>
             <tr>

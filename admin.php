@@ -32,6 +32,7 @@ if (isset($_GET['menu'])) {
 
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -70,14 +71,55 @@ if (isset($_GET['menu'])) {
                 <th>Jam</th>
                 <th class="belumTerdata">Nama</th>
                 <th class="belumTerdata">Alamat</th>
-                <th class="belumTerdata">Keluhan</th>
-                <th>Aksi</th>
-
-                <?php if ($menu == "Menunggu obat") : ?>
-                    <th>Obat</th>
+                <?php if ($menu == "Menunggu Obat") : ?>
+                    <th class="belumTerdata">Obat</th>
+                <?php else : ?>
+                    <th class="belumTerdata">Keluhan</th>
                 <?php
                 endif;
                 ?>
+
+                <th>Aksi</th>
+
+                <div>
+                    <?php switch ($menu):
+                        case ("Belum Terdaftar"): ?>
+                            <!-- Ini di belum terdaftar apa belum terdata? -->
+                            <div>
+                                <style>
+                                    th.belumTerdata {
+                                        display: none;
+                                    }
+
+                                    td.belumTerdata {
+                                        display: none;
+                                    }
+                                </style>
+                            </div>
+                            <?php break; ?>
+                        <?php
+                        case ("Belum Terdata"): ?>
+                            <!-- Ini di belum terdaftar apa belum terdata? -->
+                            <div>
+                                <style>
+                                    th.belumTerdata {
+                                        display: none;
+                                    }
+
+                                    td.belumTerdata {
+                                        display: none;
+                                    }
+                                </style>
+                            </div>
+                            <?php break; ?>
+                    <?php endswitch; ?>
+                </div>
+
+                <!-- <?php if ($menu == "Menunggu obat") : ?>
+                    <th>Obat</th>
+                <?php
+                        endif;
+                ?> -->
             </tr>
 
             <?php $i = 1; ?>
@@ -121,39 +163,7 @@ if (isset($_GET['menu'])) {
             <?php endforeach; ?>
 
 
-            <div>
-                <?php switch ($menu):
-                    case ("Belum Terdaftar"): ?>
-                        <!-- Ini di belum terdaftar apa belum terdata? -->
-                        <div>
-                            <style>
-                                th.belumTerdata {
-                                    display: none;
-                                }
 
-                                td.belumTerdata {
-                                    display: none;
-                                }
-                            </style>
-                        </div>
-                        <?php break; ?>
-                    <?php
-                    case ("Belum Terdata"): ?>
-                        <!-- Ini di belum terdaftar apa belum terdata? -->
-                        <div>
-                            <style>
-                                th.belumTerdata {
-                                    display: none;
-                                }
-
-                                td.belumTerdata {
-                                    display: none;
-                                }
-                            </style>
-                        </div>
-                        <?php break; ?>
-                <?php endswitch; ?>
-            </div>
 
         </table>
     </div>
