@@ -6,6 +6,10 @@ $pasien = query("SELECT * FROM pasien WHERE status = 'Belum Terdata'");
 $menu = "Belum Terdata";
 $tombol = "Input data";
 $link = "input-data-pasien.php";
+$class = "hidden";
+$class1 = "hidden";
+$keluhan = "keluhan";
+$aksi = "";
 if (isset($_GET['menu'])) {
     $menu = $_GET['menu'];
     switch ($menu) {
@@ -13,25 +17,31 @@ if (isset($_GET['menu'])) {
             $pasien = query("SELECT * FROM pasien WHERE status = '$menu'");
             $tombol = "Input data";
             $link = "input-data-pasien.php";
+            $class = "hidden";
             break;
         case "Menunggu Dokter":
             $pasien = query("SELECT * FROM pasien WHERE status = '$menu'");
             $tombol = "Berikan obat";
             $link = "input-obat-pasien.php";
+            $class = "";
             break;
         case "Menunggu Obat":
             $pasien = query("SELECT * FROM pasien WHERE status = '$menu'");
             $tombol = "Selesai";
             $link = "admin.php";
+            $class = "";
+            $keluhan = "obat";
             break;
         case "Pulang":
             $pasien = query("SELECT * FROM pasien WHERE status = '$menu'");
+            $aksi = "hidden";
+            $class = "";
+            $class1 = "";
             break;
     }
 }
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -43,6 +53,12 @@ if (isset($_GET['menu'])) {
 
     <link rel="stylesheet" href="/css/admin.css">
     <title>Klinik Jotaro</title>
+
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -59,8 +75,6 @@ if (isset($_GET['menu'])) {
             </form>
         </div>
 
-
-
         <br>
 
         <table class="table">
@@ -69,65 +83,17 @@ if (isset($_GET['menu'])) {
                 <th>Status</th>
                 <th>Tanggal</th>
                 <th>Jam</th>
-                <th class="belumTerdata">Nama</th>
-                <th class="belumTerdata">Alamat</th>
+                <th class="<?= $class ?> wider">Nama</th>
+                <th class="<?= $class ?> wider">Alamat</th>
                 <?php if ($menu == "Menunggu Obat") : ?>
-                    <th class="belumTerdata">Obat</th>
+                    <th class="<?= $class ?>">Obat</th>
                 <?php else : ?>
-                    <th class="belumTerdata">Keluhan</th>
-<<<<<<< HEAD
+                    <th class="<?= $class ?>">Keluhan</th>
                 <?php
                 endif;
                 ?>
-
-                <th>Aksi</th>
-
-                <div>
-                    <?php switch ($menu):
-                        case ("Belum Terdaftar"): ?>
-                            <!-- Ini di belum terdaftar apa belum terdata? -->
-                            <div>
-                                <style>
-                                    th.belumTerdata {
-                                        display: none;
-                                    }
-
-                                    td.belumTerdata {
-                                        display: none;
-                                    }
-                                </style>
-                            </div>
-                            <?php break; ?>
-                        <?php
-                        case ("Belum Terdata"): ?>
-                            <!-- Ini di belum terdaftar apa belum terdata? -->
-                            <div>
-                                <style>
-                                    th.belumTerdata {
-                                        display: none;
-                                    }
-
-                                    td.belumTerdata {
-                                        display: none;
-                                    }
-                                </style>
-                            </div>
-                            <?php break; ?>
-                    <?php endswitch; ?>
-                </div>
-
-                <!-- <?php if ($menu == "Menunggu obat") : ?>
-                    <th>Obat</th>
-                <?php
-                        endif;
-                ?> -->
-=======
-                <?php
-                endif;
-                ?>
-
-                <th class="aksi">Aksi</th>
->>>>>>> 81ba0cac1492dcc7cb87cd1ecf4ee2376c81956e
+                <th class="<?= $class1 ?> ">Obat</th>
+                <th class="<?= $aksi ?>">Aksi</th>
             </tr>
 
             <?php $i = 1; ?>
@@ -137,29 +103,30 @@ if (isset($_GET['menu'])) {
                     <td><?= $row['status'] ?></td>
                     <td><?= $row["tanggal_masuk"]; ?></td>
                     <td><?= $row['jam_masuk'] ?></td>
-                    <td class="belumTerdata"><?= $row['nama'] ?></td>
-                    <td class="belumTerdata"><?= $row['alamat'] ?></td>
-                    <td class="belumTerdata"><?= $row['keluhan'] ?></td>
+                    <td class="<?= $class ?> wider"><?= $row['nama'] ?></td>
+                    <td class="<?= $class ?> wider"><?= $row['alamat'] ?></td>
+                    <td class="<?= $class ?> "><?= $row[$keluhan] ?></td>
+                    <td class="<?= $class1 ?> "><?= $row['obat'] ?></td>
 
-                    <?php if ($menu == "Menunggu obat") : ?>
-                        <td><?= $row['obat'] ?></td>
-                    <?php endif; ?>
 
                     <td>
-                        <?php if ($menu == "Menunggu obat") : ?>
-                            <form action="" method="GET">
-                                <button name="menu" value="Menunggu obat"><?= $tombol ?></button>
+                        <?php if ($menu == "Menunggu Obat") : ?>
+                            <form action="" method="POST">
+                                <button name="aksi" value="Menunggu Obat"><?= $tombol ?></button>
                                 <?php
-                                $id = $row['id'];
-                                $query = "UPDATE pasien SET status = 'Pulang' WHERE id = $id ;";
-                                mysqli_query($conn, $query);
+                                if (isset($_POST["aksi"])) {
+                                    $id = $row['id'];
+                                    $query = "UPDATE pasien SET status = 'Pulang' WHERE id = $id ;";
+                                    mysqli_query($conn, $query);
+                                    header("Location:admin.php");
+                                }
                                 ?>
                             </form>
                         <?php
                         else :
                         ?>
                             <form action="<?php echo $link ?>" method="GET">
-                                <button class="aksi" name="id" value="<?= $row['id'] ?>"><?= $tombol ?> </button>
+                                <button class="<?= $aksi ?>" name="id" value="<?= $row['id'] ?>"><?= $tombol ?> </button>
                             </form>
                         <?php
                         endif;
@@ -168,44 +135,6 @@ if (isset($_GET['menu'])) {
                 </tr>
                 <?php $i++; ?>
             <?php endforeach; ?>
-
-<<<<<<< HEAD
-
-
-=======
-            <div>
-                <?php switch ($menu):
-                    case ("Pulang"): ?>
-                        <div>
-                            <style>
-                                .aksi {
-                                    display: none;
-                                }
-                            </style>
-                        </div>
-                        <?php break; ?>
-                    <?php
-                    case ("Belum Terdata"): ?>
-                        <!-- Ini di belum terdaftar apa belum terdata? -->
-                        <div>
-                            <style>
-                                th.belumTerdata {
-                                    display: none;
-                                }
-
-                                td.belumTerdata {
-                                    display: none;
-                                }
-
-                                button.
-                            </style>
-                        </div>
-                        <?php break; ?>
-                <?php endswitch; ?>
-            </div>
->>>>>>> 81ba0cac1492dcc7cb87cd1ecf4ee2376c81956e
-
-
         </table>
     </div>
 </body>

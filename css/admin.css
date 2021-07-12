@@ -17,6 +17,12 @@ table {
   margin: 0 auto;
 }
 
+.wider{
+  word-wrap: break-word;
+max-width: 170px;
+}
+
+
 .table-wrapper {
   text-align: center;
 }

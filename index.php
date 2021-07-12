@@ -4,14 +4,17 @@ include "config.php";
 
 setlocale(LC_ALL, 'id-ID', 'id_ID');
 date_default_timezone_set("Asia/Jakarta");
-echo $timestamp =  date('H:i:s');
 
+
+
+$last_id = "";
 if (isset($_POST['button1'])) {
     $tanggal_masuk = date("d-m-Y");
     $jam_masuk = date("H:i:s");
     $sql = "INSERT INTO pasien (tanggal_masuk,jam_masuk) VALUES ('$tanggal_masuk','$jam_masuk')";
     if (mysqli_query($conn, $sql)) {
-        echo "New record created successfully";
+        $last_id = mysqli_insert_id($conn);
+        $last_id++;
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
@@ -28,11 +31,11 @@ if (isset($_POST['button1'])) {
 
     <div class="main">
         <div class="tanggal">
-            <!-- <h2><?= date("D, j F Y"); ?></h2>
-            <h1><?= date("H:i:s"); ?></h1> -->
+            <h2><?= date("D, j F Y"); ?></h2>
 
             <div id="clock"></div>
-            <!-- LIVE CLOCK TAPI GATAU BISA DIGEDEIN APA GAK -->
+
+            <h2>Silahkan ambil nomor antrian anda disini</h2>
 
             <body onload="startTime()">
                 <script type="text/javascript">
@@ -58,9 +61,9 @@ if (isset($_POST['button1'])) {
                 </script>
         </div>
         <div class="antrian">
-            <h1>Nomor antrian : X</h1>
+            <h1>Nomor antrian : <?= $last_id ?></h1>
             <form method="post">
-                <input type="submit" name="button1" value="Ambil antrian" />
+                <button onClick="alert('<?= "Nomor antrian anda = $last_id" ?>')" type="submit" name="button1" value="Ambil antrian"> Ambil antrian </button>
             </form>
         </div>
 

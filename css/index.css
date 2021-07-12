@@ -26,6 +26,8 @@
   background-color: rgb(112, 8, 34);
 }
 
-.jam {
-  font-size: large;
+
+#clock{
+  font-size: 70px;
+  font-weight: 700;
 }
