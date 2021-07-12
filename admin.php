@@ -3,7 +3,7 @@ include("session.php");
 include("header-admin.php");
 
 $pasien = query("SELECT * FROM pasien WHERE status = 'Belum Terdata'");
-$menu = "Belum Terdaftar";
+$menu = "Belum Terdata";
 $tombol = "Input data";
 $link = "input-data-pasien.php";
 if (isset($_GET['menu'])) {
@@ -70,14 +70,15 @@ if (isset($_GET['menu'])) {
                 <th>Jam</th>
                 <th class="belumTerdata">Nama</th>
                 <th class="belumTerdata">Alamat</th>
-                <th class="belumTerdata">Keluhan</th>
-                <th>Aksi</th>
-
-                <?php if ($menu == "Menunggu obat") : ?>
-                    <th>Obat</th>
+                <?php if ($menu == "Menunggu Obat") : ?>
+                    <th class="belumTerdata">Obat</th>
+                <?php else : ?>
+                    <th class="belumTerdata">Keluhan</th>
                 <?php
                 endif;
                 ?>
+
+                <th class="aksi">Aksi</th>
             </tr>
 
             <?php $i = 1; ?>
@@ -109,8 +110,7 @@ if (isset($_GET['menu'])) {
                         else :
                         ?>
                             <form action="<?php echo $link ?>" method="GET">
-                                <button name="id" value="<?= $row['id'] ?>"><?= $tombol ?> </button>
-
+                                <button class="aksi" name="id" value="<?= $row['id'] ?>"><?= $tombol ?> </button>
                             </form>
                         <?php
                         endif;
@@ -120,18 +120,12 @@ if (isset($_GET['menu'])) {
                 <?php $i++; ?>
             <?php endforeach; ?>
 
-
             <div>
                 <?php switch ($menu):
-                    case ("Belum Terdaftar"): ?>
-                        <!-- Ini di belum terdaftar apa belum terdata? -->
+                    case ("Pulang"): ?>
                         <div>
                             <style>
-                                th.belumTerdata {
-                                    display: none;
-                                }
-
-                                td.belumTerdata {
+                                .aksi {
                                     display: none;
                                 }
                             </style>
@@ -149,11 +143,14 @@ if (isset($_GET['menu'])) {
                                 td.belumTerdata {
                                     display: none;
                                 }
+
+                                button.
                             </style>
                         </div>
                         <?php break; ?>
                 <?php endswitch; ?>
             </div>
+
 
         </table>
     </div>
