@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div class="nav">
+    <div class="nav ">
         <div class="header-left">
             <a href="#">
                 <h1>Klinik Jotaro</h1>
