@@ -5,11 +5,13 @@ td {
 }
 th {
   background-color: crimson;
-  color: rgb(39, 38, 37);
+  color: azure;
+  border-right: 2px solid rgb(228, 220, 220);
 }
 
 td {
   text-align: left;
+  border-right: 2px solid rgb(228, 220, 220);
 }
 
 table {
@@ -17,12 +19,14 @@ table {
   margin: 0 auto;
 }
 
-.wider{
+.wider {
   word-wrap: break-word;
-max-width: 170px;
+  max-width: 170px;
 }
 
-
+#title{
+  margin-top: 20px;
+}
 .table-wrapper {
   text-align: center;
 }
@@ -41,3 +45,20 @@ max-width: 170px;
 .menu-option input:hover {
   opacity: 1;
 }
+
+
+.btn {
+  padding: 12px 24px;
+  color: black;
+  display: inline-block;
+  opacity: 0.8;
+  border-radius: 4px;
+  background-color: gainsboro;
+  cursor: pointer;
+}
+
+.btn:hover {
+  opacity: 1;
+}
+
+.
